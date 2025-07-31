@@ -4,7 +4,7 @@ function Show() {
 
     // const[loca, setLoca] = useState('');
     // function handleloaction(value) {
-    //     setLoca(input = value);
+    //     setLoca(loca = value);
     // }
 
     return(
@@ -12,10 +12,13 @@ function Show() {
             <div className="bg-black w-96 ">
                <div className="flex justify-center">
                <input type="serach" className="mt-2" />
+               <button className="text-white bg-blue-500 rounded">serach</button>
                </div>
                <div className="text-white flex justify-center">
                 Show location
                </div>
+               {/* this is weather api for */}
+               <div>
                <div className="text-white">
                 16C
                </div>
@@ -24,6 +27,7 @@ function Show() {
                </div>
                <div className="text-white">
                 wind speed and many more
+               </div>
                </div>
                <div className="text-white">
                conculsion of weather here
