@@ -2,20 +2,23 @@ import { useState } from "react";
 
 function Show() {
 
-    // const[loca, setLoca] = useState('');
-    // function handleloaction(value) {
-    //     setLoca(loca = value);
-    // }
+    const[loca, setLoca] = useState('Location');
+
+    function handlelocation(event) {
+        setLoca(event.target.value);
+    }
+
+    
 
     return(
         <div className="bg-gray-700 bg-cover h-screen flex items-center justify-center ">
             <div className="bg-black w-96 ">
                <div className="flex justify-center">
-               <input type="serach" className="mt-2" />
-               <button className="text-white bg-blue-500 rounded">serach</button>
+               <input type="text" className="mt-2"  placeholder="Enter something" onChange={handlelocation} />
+               <button className="text-white bg-blue-500 rounded" onClick={handlelocation}>serach</button>
                </div>
                <div className="text-white flex justify-center">
-                Show location
+                {loca}
                </div>
                {/* this is weather api for */}
                <div>
