@@ -5,6 +5,8 @@ function Show() {
     const [loca, setLoca] = useState('');
     const [show, setShow] = useState('Location');
     const [cond, setCond] = useState(false);
+    const [icons , setIcons] = useState("");
+    const [tem , setTem] = useState('16');
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${loca}&appid=053591a1f4e308d7a86520d84c8a3d46&units=metric`;
 
 
@@ -25,6 +27,8 @@ function Show() {
             const response = await fetch(api);
             const result = await response.json();
             console.log(result);
+            setIcons(result.weather[0].icon);
+            setTem(result.main.temp);
 
         } catch (error) {
             console.log("Error", error);
@@ -53,10 +57,10 @@ function Show() {
                 {/* this is weather api for */}
                 <div>
                     <div className="text-white">
-                        16C
+                        {tem}
                     </div>
                     <div className="text-white">
-                        <img src="" alt="image of weather" />
+                        <img src={icons} alt="image of weather" />
                     </div>
                     <div className="text-white">
                         wind speed and many more
