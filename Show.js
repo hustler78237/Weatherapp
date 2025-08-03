@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 function Show() {
-    
+
     const [loca, setLoca] = useState('');
     const [show, setShow] = useState('Location');
-    const [cond , setCond] = useState(false);
+    const [cond, setCond] = useState(false);
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${loca}&appid=053591a1f4e308d7a86520d84c8a3d46&units=metric`;
-    
+
 
     function handlelocation(event) {
         setLoca(event.target.value);
@@ -18,13 +18,18 @@ function Show() {
     }
 
     // data fetching through api
-    function datafetch() {
-        fetch(api)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.log("Error:", error))
+    // result is response  of api if i want to fetch details i have to use result
+    async function datafetch() {
 
-            setCond(false);
+        try {
+            const response = await fetch(api);
+            const result = await response.json();
+            console.log(result);
+
+        } catch (error) {
+            console.log("Error", error);
+        }
+        setCond(false);
     }
     if (cond === true) {
         datafetch();
