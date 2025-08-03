@@ -2,23 +2,27 @@ import { useState } from "react";
 
 function Show() {
 
-    const[loca, setLoca] = useState('Location');
+    const[loca, setLoca] = useState('');
+    const[show , setShow] = useState('Location');
 
     function handlelocation(event) {
         setLoca(event.target.value);
     }
 
-    
+    function handleshow() {
+        setShow(loca);
+    }
 
     return(
         <div className="bg-gray-700 bg-cover h-screen flex items-center justify-center ">
             <div className="bg-black w-96 ">
+                {/* this is our serach bar and show location */}
                <div className="flex justify-center">
-               <input type="text" className="mt-2"  placeholder="Enter something" onChange={handlelocation} />
-               <button className="text-white bg-blue-500 rounded" onClick={handlelocation}>serach</button>
+               <input type="text" className="mt-2"  placeholder="Enter something" onChange={handlelocation}/>
+               <button className="text-white bg-blue-500 rounded" onClick={handleshow}>serach</button>
                </div>
                <div className="text-white flex justify-center">
-                {loca}
+                 {show}
                </div>
                {/* this is weather api for */}
                <div>
