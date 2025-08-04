@@ -5,9 +5,17 @@ function Show() {
     const [loca, setLoca] = useState('');
     const [show, setShow] = useState('Location');
     const [cond, setCond] = useState(false);
-    const [icons , setIcons] = useState("");
+    const [icons , setIcons] = useState("10d");
     const [tem , setTem] = useState('16');
+    const [desc , setDesc] = useState('Weather Condition');
+    const [ftemp, setFtemp] = useState('15');
+    const [humi , setHumi] = useState('81');
+    const [ws , setWs] = useState('21');
+    const [srise, setSrise] = useState('');
+    const [sun , setSun] = useState('');
+    // api url section
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${loca}&appid=053591a1f4e308d7a86520d84c8a3d46&units=metric`;
+    let apiicon = `https://openweathermap.org/img/wn/${icons}@2x.png `
 
 
     function handlelocation(event) {
@@ -26,9 +34,21 @@ function Show() {
         try {
             const response = await fetch(api);
             const result = await response.json();
-            console.log(result);
+            // console.log(result);
             setIcons(result.weather[0].icon);
+            // console.log(result.weather[0].icon)
             setTem(result.main.temp);
+            setDesc(result.weather[0].description);
+            setFtemp(result.main.feels_like);
+            setHumi(result.main.humidity);
+            setWs(result.wind.speed);
+
+            let time = result.sys.sunrise;
+            let time1 = result.sys.sunset;
+            let sr = new Date(time * 1000).toUTCString();
+            let sr1 = new Date(time1 * 1000).toUTCString();
+            setSrise(sr);
+            setSun(sr1);
 
         } catch (error) {
             console.log("Error", error);
@@ -57,13 +77,28 @@ function Show() {
                 {/* this is weather api for */}
                 <div>
                     <div className="text-white">
-                        {tem}
+                        {tem}C
                     </div>
                     <div className="text-white">
-                        <img src={icons} alt="image of weather" />
+                        Feeling temperature :  {ftemp}C
                     </div>
                     <div className="text-white">
-                        wind speed and many more
+                        Humidity :  {humi}%
+                    </div>
+                     <div className="text-white">
+                        Wind Speed :  {ws}Km/hr
+                    </div>
+                    <div className="text-white">
+                        Sunrise :  {srise}
+                    </div>
+                    <div className="text-white">
+                        Sunset :  {sun}
+                    </div>
+                    <div className="text-white bg-red-300">
+                        <img src={apiicon} alt="image of weather" />
+                    </div>
+                    <div className="text-white">
+                        {desc}
                     </div>
                 </div>
                 <div className="text-white">
