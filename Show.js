@@ -35,6 +35,9 @@ function Show() {
             const response = await fetch(api);
             const result = await response.json();
             // console.log(result);
+            if (result.cod == 200 ) {
+                
+            
             setIcons(result.weather[0].icon);
             // console.log(result.weather[0].icon)
             setTem(result.main.temp);
@@ -51,6 +54,18 @@ function Show() {
             let sr1 = new Date((time1+timezne1) * 1000).toUTCString();
             setSrise(sr);
             setSun(sr1);
+            setShow(result.name)
+        } else if(result.cod == 404){
+            setIcons("10d");
+            setTem("Temperature in ")
+            setDesc("Weather Condition")
+            setFtemp("Temperature in ")
+            setHumi("Humidity in ")
+            setWs("Wind Speed ")
+            setSrise("Sunrise Time")
+            setSun("Sunset Time")
+            setShow("city not found")
+        }
 
         } catch (error) {
             console.log("Error", error);
@@ -70,7 +85,7 @@ function Show() {
             <div className="bg-black w-96 ">
                 {/* this is our serach bar and show location */}
                 <div className="flex justify-center">
-                    <input type="text" className="mt-2" placeholder="Enter Location" onChange={handlelocation} />
+                    <input type="text" className="mt-2" placeholder="Enter State Name" onChange={handlelocation} />
                     <button className="text-white bg-blue-500 rounded" onClick={handleshow}>Serach</button>
                 </div>
                 <div className="text-white flex justify-center">
