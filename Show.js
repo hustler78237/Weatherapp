@@ -6,13 +6,13 @@ function Show() {
     const [show, setShow] = useState('Location');
     const [cond, setCond] = useState(false);
     const [icons , setIcons] = useState("10d");
-    const [tem , setTem] = useState('16');
+    const [tem , setTem] = useState('Temperature in ');
     const [desc , setDesc] = useState('Weather Condition');
-    const [ftemp, setFtemp] = useState('15');
-    const [humi , setHumi] = useState('81');
-    const [ws , setWs] = useState('21');
-    const [srise, setSrise] = useState('');
-    const [sun , setSun] = useState('');
+    const [ftemp, setFtemp] = useState('Temperature in ');
+    const [humi , setHumi] = useState('Humidity in ');
+    const [ws , setWs] = useState('WindSpeed ');
+    const [srise, setSrise] = useState('Sunrise time');
+    const [sun , setSun] = useState('Sunset time');
     // api url section
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${loca}&appid=053591a1f4e308d7a86520d84c8a3d46&units=metric`;
     let apiicon = `https://openweathermap.org/img/wn/${icons}@2x.png `
@@ -44,9 +44,11 @@ function Show() {
             setWs(result.wind.speed);
 
             let time = result.sys.sunrise;
+            let timezne = result.timezone;
             let time1 = result.sys.sunset;
-            let sr = new Date(time * 1000).toUTCString();
-            let sr1 = new Date(time1 * 1000).toUTCString();
+            let timezne1 = result.timezone;
+            let sr = new Date((time+timezne) * 1000).toUTCString();
+            let sr1 = new Date((time1+timezne1) * 1000).toUTCString();
             setSrise(sr);
             setSun(sr1);
 
@@ -77,7 +79,7 @@ function Show() {
                 {/* this is weather api for */}
                 <div>
                     <div className="text-white">
-                        {tem}C
+                        temperature = {tem}C
                     </div>
                     <div className="text-white">
                         Feeling temperature :  {ftemp}C
@@ -94,15 +96,12 @@ function Show() {
                     <div className="text-white">
                         Sunset :  {sun}
                     </div>
-                    <div className="text-white bg-red-300">
+                    <div className="text-white">
                         <img src={apiicon} alt="image of weather" />
                     </div>
                     <div className="text-white">
-                        {desc}
+                        Weather Condition : {desc}
                     </div>
-                </div>
-                <div className="text-white">
-                    conculsion of weather here
                 </div>
             </div>
         </div>
